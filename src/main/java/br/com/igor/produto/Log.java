@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 
-public class LogSistema {
+public class Log{
 
 	private static final ArrayList<String> logs = new ArrayList<String>();
 	private static int contador= 0;

@@ -7,8 +7,7 @@ public class App {
 	public static void main(String[] args) {
 		
 		IniciarEstoque();
-		LogSistema logS = new LogSistema(); 
-		logS.imprimirTudo();
+		Log.imprimirTudo();
 
 	}
 	
