@@ -25,8 +25,7 @@ public abstract class Produtos {
 		this.proporcaoHeraca = proporcaoHeranca;
 		
 		Log.registrar("Criando Produto " + nome);
-		
-	
+		this.normalizar();
 	}
 	
 	
@@ -38,9 +37,28 @@ public abstract class Produtos {
 	public double getEstoqueHerranca() {return this.herancaEstoque;}
 	public Produto getObjetoProdutoPai() {if(this.getNomePai() != null) {return this.produtoPai;} return null;}
 	
-	@SuppressWarnings("static-access")
+	
 	public void adicionarEstoque(double quantidade){
 		Log.registrar("Adicionado quantidade: "+ quantidade + " Produto: " + this.nome);
 	}
+	
+	public void normalizar() {
+		if (this.getNomePai() == null ) {
+			Log.registrar(getNome() + " esse produto é uma raiz");
+			
+			this.herancaEstoque = this.meuEtoque * this.proporcaoHeraca;
+			
+			Log.registrar(nome + " normalização concluída");
+			return;
+		}
+		Log.registrar("| Esse produto " + nome + " é herdeiro de " + this.getNomePai());
+		
+		this.produtoPai.normalizar();
+		this.meuEtoque = this.produtoPai.herancaEstoque/ this.minhaProporcao;
+		this.herancaEstoque = this.meuEtoque * this.proporcaoHeraca;
+		
+		Log.registrar("| "+nome + " esse produto foi normalizado");
+	}
+	
 	
 }
