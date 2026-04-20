@@ -33,6 +33,7 @@ public abstract class Produtos {
 	public String getNomePai() {if( this.produtoPai == null) { return null;} else {return this.produtoPai.getNome();} }
 	public double getMinhaProporcao() {return this.minhaProporcao;}
 	public double getProporcaoHeranca() {return this.proporcaoHeraca;}
+	public double getGlobalEstoqueProduto() {return Produtos.globalEstoque;}
 	public double getEstoqueAtual() {return this.meuEtoque;}
 	public double getEstoqueHerranca() {return this.herancaEstoque;}
 	public Produto getObjetoProdutoPai() {if(this.getNomePai() != null) {return this.produtoPai;} return null;}
@@ -40,6 +41,15 @@ public abstract class Produtos {
 	
 	public void adicionarEstoque(double quantidade){
 		Log.registrar("Adicionado quantidade: "+ quantidade + " Produto: " + this.nome);
+		
+		if (this.produtoPai == null) {
+			this.meuEtoque += quantidade / this.minhaProporcao;
+			this.herancaEstoque = this.meuEtoque * this.proporcaoHeraca;
+			Produtos.globalEstoque = this.meuEtoque;
+			return;
+		}
+		
+		
 	}
 	
 	public void normalizar() {
@@ -56,8 +66,9 @@ public abstract class Produtos {
 		this.produtoPai.normalizar();
 		this.meuEtoque = this.produtoPai.herancaEstoque/ this.minhaProporcao;
 		this.herancaEstoque = this.meuEtoque * this.proporcaoHeraca;
+		Produtos.globalEstoque += this.meuEtoque;
 		
-		Log.registrar("| "+nome + " esse produto foi normalizado");
+		Log.registrar("| "+nome + " normalização concluída");
 	}
 	
 	
