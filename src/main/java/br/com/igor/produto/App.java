@@ -1,5 +1,8 @@
 package br.com.igor.produto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import br.com.igor.produto.concreta.Produto;
 
 public class App {
@@ -7,8 +10,8 @@ public class App {
 	public static void main(String[] args) {
 		
 		IniciarEstoque();
+		
 		Log.imprimirTudo();
-
 	}
 	
 	public static void IniciarEstoque() {
@@ -27,7 +30,7 @@ public class App {
 		System.out.println("Estoque Atual: "+produto1.getEstoqueAtual()+" Estoque herança: "+produto1.getEstoqueHerranca());
 		
 		System.out.println();
-		produto1.adicionarEstoque(16);
+		produto1.adicionarEstoque(90);
 		
 		System.out.println();
 		System.out.println(produto.getNome());
@@ -42,5 +45,10 @@ public class App {
 		System.out.println("Estoque Atual: "+produto1.getEstoqueAtual()+" Estoque herança: "+produto1.getEstoqueHerranca());
 		
 	}
+	
+	
+
+
+	
 
 }

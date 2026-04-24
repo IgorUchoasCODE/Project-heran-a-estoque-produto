@@ -1,7 +1,6 @@
 package br.com.igor.produto.abstratic;
 
 import br.com.igor.produto.Log;
-import br.com.igor.produto.LogSistema;
 import br.com.igor.produto.concreta.Produto;
 
 public abstract class Produtos {
@@ -25,7 +24,6 @@ public abstract class Produtos {
 		this.proporcaoHeraca = proporcaoHeranca;
 		
 		Log.registrar("Criando Produto " + nome);
-		this.normalizar();
 	}
 	
 	
@@ -39,37 +37,20 @@ public abstract class Produtos {
 	public Produto getObjetoProdutoPai() {if(this.getNomePai() != null) {return this.produtoPai;} return null;}
 	
 	
-	public void adicionarEstoque(double quantidade){
-		Log.registrar("Adicionado quantidade: "+ quantidade + " Produto: " + this.nome);
-		
-		if (this.produtoPai == null) {
-			this.meuEtoque += quantidade / this.minhaProporcao;
-			this.herancaEstoque = this.meuEtoque * this.proporcaoHeraca;
-			Produtos.globalEstoque = this.meuEtoque;
-			return;
-		}
-		
-		
-	}
 	
-	public void normalizar() {
-		if (this.getNomePai() == null ) {
-			Log.registrar(getNome() + " esse produto é uma raiz");
+	
+	
+	
+	
+	public void adicionarEstoque(double quantidade){
+		if (this.produtoPai == null) {}
 			
-			this.herancaEstoque = this.meuEtoque * this.proporcaoHeraca;
-			
-			Log.registrar(nome + " normalização concluída");
-			return;
-		}
-		Log.registrar("| Esse produto " + nome + " é herdeiro de " + this.getNomePai());
-		
-		this.produtoPai.normalizar();
-		this.meuEtoque = this.produtoPai.herancaEstoque/ this.minhaProporcao;
-		this.herancaEstoque = this.meuEtoque * this.proporcaoHeraca;
-		Produtos.globalEstoque += this.meuEtoque;
-		
-		Log.registrar("| "+nome + " normalização concluída");
-	}
+
+	}//======================fim do metodo
+	
+	
+
+	
 	
 	
 }
