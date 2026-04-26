@@ -11,13 +11,21 @@ public class MyFuncoes {
 	 private static final BigDecimal doisQuarto = new BigDecimal("0.50");
 	 private static final BigDecimal tresQuarto = new BigDecimal("0.75");
 	
-	public static BigDecimal[] distribuicao(BigDecimal distribuir, BigDecimal conversao) {
+	public  double[] distribuicao(String distribui, String conversa) {
 		
-		if ( distribuir == null || conversao == null || conversao.signum() == 0) {
-			
-			return new BigDecimal[] { BigDecimal.ZERO, BigDecimal.ZERO };
-		}
-
+	   if (distribui == null || conversa == null || distribui.trim().isEmpty() || conversa.trim().isEmpty()) {
+	        Log.registrar("Erro: Entrada vazia ou nula.");
+	        return new double[] { 0.0, 0.0 };
+	    }
+	   
+	
+		BigDecimal distribuir = new BigDecimal(distribui);
+		BigDecimal conversao = new BigDecimal(conversa);
+		
+		if (conversao.signum() == 0) {
+            return new double[] { 0.0, 0.0 };
+        }
+		
 	    BigDecimal[] resultado = new BigDecimal[2];
 
 	    // divisao = distribuir / conversao
@@ -25,7 +33,7 @@ public class MyFuncoes {
 	    BigDecimal inteiro = divisao.setScale(0, RoundingMode.FLOOR);
 	    BigDecimal resto = divisao.subtract(inteiro);
 	    
-	    Log.registrar("\n  Divisão "+divisao+"\n  inteiro "+inteiro+"\n  resto "+resto);
+	    //Log.registrar("\n  Divisão "+divisao+"\n  inteiro "+inteiro+"\n  resto "+resto);
 
 	   
 
@@ -46,9 +54,13 @@ public class MyFuncoes {
 	        resultado[1] = resto.subtract(tresQuarto).multiply(conversao);
 	    }
 	    
-	    Log.registrar("\n  ajusto fino [1]"+resultado[1]);
+	    //Log.registrar("\n  ajusto fino [1]"+resultado[1]);
 	    resultado[1] = resultado[1].setScale(0, RoundingMode.HALF_UP);
-	    Log.registrar("\n  ajusto fino [1]"+resultado[1]);
-	    return resultado;
+	    //Log.registrar("\n  ajusto fino [1]"+resultado[1]);
+	    
+	    double[] fim = new  double[2];
+	    fim[0]= resultado[0].doubleValue();
+	    fim[1]= resultado[1].doubleValue();
+	    return fim;
 	}
 }
